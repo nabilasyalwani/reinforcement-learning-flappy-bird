@@ -1,11 +1,12 @@
 #!/usr/bin/env python
 from __future__ import print_function
 
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
+tf.disable_v2_behavior()
 import cv2
 import sys
 sys.path.append("game/")
-import wrapped_flappy_bird as game
+from game.wrapped_flappy_bird import GameState
 import random
 import numpy as np
 from collections import deque
@@ -81,17 +82,13 @@ def trainNetwork(s, readout, h_fc1, sess):
     y = tf.placeholder("float", [None])
     readout_action = tf.reduce_sum(tf.multiply(readout, a), reduction_indices=1)
     cost = tf.reduce_mean(tf.square(y - readout_action))
-    train_step = tf.train.AdamOptimizer(1e-6).minimize(cost)
+    train_step = tf.train.AdamOptimizer(1e-4).minimize(cost)
 
     # open up a game state to communicate with emulator
-    game_state = game.GameState()
+    game_state = GameState()
 
     # store the previous observations in replay memory
     D = deque()
-
-    # printing
-    a_file = open("logs_" + GAME + "/readout.txt", 'w')
-    h_file = open("logs_" + GAME + "/hidden.txt", 'w')
 
     # get the first state by doing nothing and preprocess the image to 80x80x4
     do_nothing = np.zeros(ACTIONS)

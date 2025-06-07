@@ -17,7 +17,7 @@ SCREEN = pygame.display.set_mode((SCREENWIDTH, SCREENHEIGHT))
 pygame.display.set_caption('Flappy Bird')
 
 IMAGES, SOUNDS, HITMASKS = flappy_bird_utils.load()
-PIPEGAPSIZE = 100 # gap between upper and lower part of pipe
+PIPEGAPSIZE = 150 # gap between upper and lower part of pipe
 BASEY = SCREENHEIGHT * 0.79
 
 PLAYER_WIDTH = IMAGES['player'][0].get_width()
@@ -34,6 +34,8 @@ class GameState:
         self.score = self.playerIndex = self.loopIter = 0
         self.playerx = int(SCREENWIDTH * 0.2)
         self.playery = int((SCREENHEIGHT - PLAYER_HEIGHT) / 2)
+        self.pipex = SCREENWIDTH + 10
+        self.pipeGapY = int(BASEY * 0.2) + PIPEGAPSIZE
         self.basex = 0
         self.baseShift = IMAGES['base'].get_width() - BACKGROUND_WIDTH
 
@@ -134,7 +136,7 @@ class GameState:
 
         SCREEN.blit(IMAGES['base'], (self.basex, BASEY))
         # print score so player overlaps the score
-        # showScore(self.score)
+        showScore(self.score)
         SCREEN.blit(IMAGES['player'][self.playerIndex],
                     (self.playerx, self.playery))
 
@@ -142,24 +144,27 @@ class GameState:
         pygame.display.update()
         FPSCLOCK.tick(FPS)
         #print self.upperPipes[0]['y'] + PIPE_HEIGHT - int(BASEY * 0.2)
+        # print("bird_y:", self.get_bird_y(), "pipe_x:", self.get_next_pipe_x(), "pipe_gap_y:", self.get_next_pipe_gap_y())
         return image_data, reward, terminal
 
-def getRandomPipe():
-    """returns a randomly generated pipe"""
-    # y of gap between upper and lower pipe
-    gapYs = [20, 30, 40, 50, 60, 70, 80, 90]
-    index = random.randint(0, len(gapYs)-1)
-    gapY = gapYs[index]
 
-    gapY += int(BASEY * 0.2)
-    pipeX = SCREENWIDTH + 10
+    def get_bird_y(self):
+        return min(max(int(self.playery // 50), 0), 9) 
 
-    return [
-        {'x': pipeX, 'y': gapY - PIPE_HEIGHT},  # upper pipe
-        {'x': pipeX, 'y': gapY + PIPEGAPSIZE},  # lower pipe
-    ]
+    def get_next_pipe_x(self):
+        for pipe in self.upperPipes:
+            if pipe['x'] + PIPE_WIDTH > self.playerx:
+                return min(max(int((pipe['x'] - self.playerx) // 30), 0), 9)
+        return 9
 
+    def get_next_pipe_gap_y(self):
+        for i in range(len(self.upperPipes)):
+            if self.upperPipes[i]['x'] + PIPE_WIDTH > self.playerx:
+                gap_y = self.lowerPipes[i]['y'] - PIPEGAPSIZE // 2
+                return min(max(int(gap_y // 50), 0), 9)
+        return 9
 
+        
 def showScore(score):
     """displays score in center of screen"""
     scoreDigits = [int(x) for x in list(str(score))]
@@ -187,7 +192,7 @@ def checkCrash(player, upperPipes, lowerPipes):
     else:
 
         playerRect = pygame.Rect(player['x'], player['y'],
-                      player['w'], player['h'])
+                    player['w'], player['h'])
 
         for uPipe, lPipe in zip(upperPipes, lowerPipes):
             # upper and lower pipe rects
@@ -223,3 +228,19 @@ def pixelCollision(rect1, rect2, hitmask1, hitmask2):
             if hitmask1[x1+x][y1+y] and hitmask2[x2+x][y2+y]:
                 return True
     return False
+
+
+def getRandomPipe():
+    """returns a randomly generated pipe"""
+    # y of gap between upper and lower pipe
+    gapYs = [20, 30, 40, 50, 60, 70, 80, 90]
+    index = random.randint(0, len(gapYs)-1)
+    gapY = gapYs[index]
+
+    gapY += int(BASEY * 0.2)
+    pipeX = SCREENWIDTH + 10
+
+    return [
+        {'x': pipeX, 'y': gapY - PIPE_HEIGHT},  # upper pipe
+        {'x': pipeX, 'y': gapY + PIPEGAPSIZE},  # lower pipe
+    ]

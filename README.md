@@ -1,5 +1,11 @@
 # Reinforcement Learning pada Game Flappy Bird 
 
+## Anggota Kelompok 7 Kelas PM (D):
+5025231253	Bunga Melati Putri Luqman
+5025231104	Andi Nur Nabila Syalwani
+5025231063	Alma Khusnia
+5025231315	Alya Rahmatillah Machmud
+
 ## Overview
 Game Flappy Bird ini mengimplementasikan salah satu algoritma Reinforcement Learning yakni Q-Learning.
 

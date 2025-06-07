@@ -1,10 +1,6 @@
 # Reinforcement Learning pada Game Flappy Bird 
 
 ## Anggota Kelompok:
-5025231253	Bunga Melati Putri Luqman
-5025231104	Andi Nur Nabila Syalwani
-5025231063	Alma Khusnia
-5025231315	Alya Rahmatillah Machmud
 
 | Name                     | NRP        | Class                 |
 | ------------------------ | ---------- | --------------------- |

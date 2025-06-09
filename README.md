@@ -10,11 +10,10 @@
 | Alya Rahmatillah Machmud | 5025231315 | Pembelajaran Mesin (D) |
 
 ## Overview
-Game Flappy Bird ini mengimplementasikan salah satu algoritma Reinforcement Learning yakni Q-Learning. Implementasinya bisa dilihat pada kode berikut [Flappy Bird](https://github.com/nabilasyalwani/reinforcement-learning-flappy-bird/blob/main/q_learing.py)
+Game Flappy Bird ini mengimplementasikan salah satu algoritma Reinforcement Learning yakni Q-Learning. Agen yakni burung dikendalikan oleh algoritma Q-learning untuk mencapai goal yaitu menghindari tabrakan dengan pipa dan memaksimalkan skor. Aksi yang dilakukan ada 2 yaitu 0 (tidak melakukan apa-apa) artinya burung jatuh karena gravitasi dan 1 (terbang/flap) dengan burung terbang keatas untuk menghindari pipa
 
 
 ![image](https://github.com/user-attachments/assets/32ab4609-4c97-4fc0-9b31-bb58247edbf1)
-
 
 
 ## Install Dependencies:

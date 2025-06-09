@@ -10,9 +10,11 @@
 | Alya Rahmatillah Machmud | 5025231315 | Pembelajaran Mesin (D) |
 
 ## Overview
-Game Flappy Bird ini mengimplementasikan salah satu algoritma Reinforcement Learning yakni Q-Learning.
+Game Flappy Bird ini mengimplementasikan salah satu algoritma Reinforcement Learning yakni Q-Learning. Implementasinya bisa dilihat pada kode berikut [Flappy Bird](https://github.com/nabilasyalwani/reinforcement-learning-flappy-bird/blob/main/q_learing.py)
 
-![image](https://github.com/user-attachments/assets/3640fede-7fe4-4b84-85b5-d400313a1320)
+
+![image](https://github.com/user-attachments/assets/32ab4609-4c97-4fc0-9b31-bb58247edbf1)
+
 
 
 ## Install Dependencies:

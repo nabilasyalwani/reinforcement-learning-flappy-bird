@@ -12,6 +12,9 @@
 ## Overview
 Game Flappy Bird ini mengimplementasikan salah satu algoritma Reinforcement Learning yakni Q-Learning.
 
+![image](https://github.com/user-attachments/assets/3640fede-7fe4-4b84-85b5-d400313a1320)
+
+
 ## Install Dependencies:
 * Python 2.7 or 3
 * TensorFlow

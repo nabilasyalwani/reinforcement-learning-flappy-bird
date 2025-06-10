@@ -144,9 +144,11 @@ def train():
 - Mengulang game sebanyak EPISODES kali.
 - Pada setiap episode, agen mengambil aksi berdasarkan Q-table atau eksplorasi.
 - Q-table diperbarui menggunakan rumus Q-learning:
-  $$
-  Q(s, a) \leftarrow Q(s, a) + \alpha \left( r + \gamma \max_{a'} Q(s', a') - Q(s, a) \right)
-  $$
+
+$$
+Q(s, a) \leftarrow Q(s, a) + \alpha \left( r + \gamma \max_{a'} Q(s', a') - Q(s, a) \right)
+$$
+
 - Skor total per episode ditampilkan untuk melihat progres pelatihan.
 
 ## Referensi

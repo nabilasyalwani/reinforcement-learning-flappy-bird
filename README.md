@@ -56,16 +56,13 @@ FINAL_EPSILON = 0.01
 EPISODES = 10000
 ```
 
-**Penjelasan:**
 Bagian ini mengatur nilai-nilai yang memengaruhi cara agen belajar dan seberapa banyak eksplorasi dilakukan.
-
 <br>
 
 ```
 ACTIONS = 2  # 0: do nothing, 1: flap
 ```
 
-**Penjelasan:**
 Burung hanya bisa melakukan dua aksi: 0 (diam) dan 1 (terbang).
 <br>
 
@@ -78,7 +75,6 @@ def get_features(game_state):
     return (bird_y, pipe_x, pipe_gap_y)
 ```
 
-**Penjelasan:**
 Fungsi ini mengambil informasi penting dari file `game`, yakni posisi burung, posisi pipa terdekat, dan posisi celah pipa dalam nilai diskrit sehingga skala untuk statenya tidak terlalu besar dan masih dapat ditampung oleh Q-table.
 <br>
 
@@ -87,7 +83,6 @@ Fungsi ini mengambil informasi penting dari file `game`, yakni posisi burung, po
 Q = np.zeros((NUM_BINS, NUM_BINS, NUM_BINS, ACTIONS))
 ```
 
-**Penjelasan:**
 Bagian ini membuat Q-table kosong untuk menyimpan nilai Q dari kombinasi state (diskretisasi 3 variabel) dan 2 aksi.
 <br>
 
@@ -99,7 +94,6 @@ def choose_action(state, epsilon):
         return np.argmax(Q[state])
 ```
 
-**Penjelasan:**
 Fungsi ini digunakan untuk memilih aksi berdasarkan strategi ε-greedy: dengan probabilitas ε melakukan aksi acak (eksplorasi), sisanya memilih aksi terbaik dari Q-table (eksploitasi).
 <br>
 
